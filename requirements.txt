@@ -1,0 +1,4 @@
+opentelemetry-sdk
+opentelemetry-exporter-otlp
+ansible-runner
+ansible

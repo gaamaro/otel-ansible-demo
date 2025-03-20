@@ -1,0 +1,32 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+
+processors:
+
+extensions:
+  health_check: {}
+
+exporters:
+  otlphttp:
+    endpoint: "https://XXXXXXXXX.live.dynatrace.com/api/v2/otlp"
+    headers:
+      Authorization: "XXX"
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+  otlp:
+    endpoint: jaeger:4317
+    tls:
+      insecure: true
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [otlp, otlphttp]
+
+  telemetry:
+    metrics:
+      address: 0.0.0.0:8888

@@ -1,0 +1,54 @@
+---
+- name: Instalar e configurar Nginx
+  hosts: vps
+  become: yes  # Isso permite que o Ansible execute comandos com privilégios de superusuário
+
+  tasks:
+    - name: Atualizar cache do apt
+      apt:
+        update_cache: yes
+      when: ansible_os_family == "Debian"  # Isso é específico para sistemas baseados em Debian/Ubuntu
+
+    - name: Instalar Nginx
+      package:
+        name: nginx
+        state: present
+
+    - name: Criar diretório para o site
+      file:
+        path: /var/www/exemplo
+        state: directory
+        mode: '0755'
+
+    - name: Criar página HTML de exemplo
+      copy:
+        content: |
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>Bem-vindo ao Nginx!</title>
+          </head>
+          <body>
+              <h1>Sucesso! O Nginx está funcionando!</h1>
+              <p>Se você vê esta página, o servidor Nginx foi instalado com sucesso.</p>
+          </body>
+          </html>
+        dest: /var/www/exemplo/index.html
+
+    - name: Configurar Nginx
+      template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/sites-available/default
+      notify: Recarregar Nginx
+
+    - name: Garantir que o Nginx esteja rodando
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+  handlers:
+    - name: Recarregar Nginx
+      service:
+        name: nginx
+        state: reloaded

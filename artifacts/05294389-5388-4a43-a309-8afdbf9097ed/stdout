@@ -1,0 +1,30 @@
+
+PLAY [Instalar e configurar Nginx] *********************************************
+
+TASK [Gathering Facts] *********************************************************
+[1;35mcore/2.18/reference_appendices/interpreter_discovery.html for more information.[0m
+[0;32mok: [82.25.65.201][0m
+
+TASK [Atualizar cache do apt] **************************************************
+[0;33mchanged: [82.25.65.201][0m
+
+TASK [Instalar Nginx] **********************************************************
+[0;33mchanged: [82.25.65.201][0m
+
+TASK [Criar diretório para o site] *********************************************
+[0;33mchanged: [82.25.65.201][0m
+
+TASK [Criar página HTML de exemplo] ********************************************
+[0;33mchanged: [82.25.65.201][0m
+
+TASK [Configurar Nginx] ********************************************************
+[0;33mchanged: [82.25.65.201][0m
+
+TASK [Garantir que o Nginx esteja rodando] *************************************
+[0;32mok: [82.25.65.201][0m
+
+RUNNING HANDLER [Recarregar Nginx] *********************************************
+[0;33mchanged: [82.25.65.201][0m
+
+PLAY RECAP *********************************************************************
+[0;33m82.25.65.201[0m               : [0;32mok=8   [0m [0;33mchanged=6   [0m unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

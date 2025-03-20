@@ -1,0 +1,1 @@
+{"event": "verbose", "uuid": "34f18dc1-e4b2-4531-baf2-9078e044dc60", "counter": 6, "stdout": "\u001b[1;35minterpreter at /repo/demo-ansible-monit/.venv/bin/python3.12, but future\u001b[0m", "start_line": 5, "end_line": 6, "runner_ident": "49fdae61-89d1-4153-9e6a-ba09461e393d", "created": "2025-03-18T17:08:57.627005+00:00"}

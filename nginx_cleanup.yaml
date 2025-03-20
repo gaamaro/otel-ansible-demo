@@ -1,0 +1,46 @@
+---
+- name: Limpar instalação do Nginx
+  hosts: vps
+  become: yes
+
+  tasks:
+    - name: Parar o serviço Nginx
+      systemd:
+        name: nginx
+        state: stopped
+      ignore_errors: yes
+
+    - name: Remover o Nginx
+      package:
+        name: nginx
+        state: absent
+
+    - name: Remover diretório do site de exemplo
+      file:
+        path: /var/www/exemplo
+        state: absent
+
+    - name: Remover configuração do Nginx
+      file:
+        path: /etc/nginx/sites-available/default
+        state: absent
+
+    - name: Remover link simbólico da configuração do Nginx
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+
+    - name: Remover diretório de logs do Nginx
+      file:
+        path: /var/log/nginx
+        state: absent
+
+    - name: Limpar pacotes não utilizados
+      apt:
+        autoremove: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Limpar cache do apt
+      apt:
+        autoclean: yes
+      when: ansible_os_family == "Debian"
